@@ -11,3 +11,6 @@ class Task(models.Model):
     description = models.TextField(max_length=500,blank=True,null=True)
     status = models.CharField(choices=[("created","created"),("started","started"),("in_progress","in_progress"),("completed","completed")],default="created",max_length=20)  # You can use choices for predefined statuses
     due_date = models.DateField()
+    
+    def __str__(self) -> str:
+        return self.title
