@@ -21,6 +21,9 @@ class TaskRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = TaskSerializer
     
 class TaskSortListView(generics.ListAPIView):
+    """ 
+    View to Sort tasks based on due_date and title.
+    """
     permission_classes = [IsAuthenticated]
     serializer_class = TaskSerializer
     
@@ -32,6 +35,9 @@ class TaskSortListView(generics.ListAPIView):
     
 
 class TaskFilterListView(generics.ListAPIView):
+    """
+    View to Filter Tasks based on status and due_date.
+    """
     permission_classes = [IsAuthenticated]
     serializer_class = TaskSerializer
 

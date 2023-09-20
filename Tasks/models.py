@@ -13,6 +13,7 @@ class Task(models.Model):
     due_date = models.DateField()
     
     def __str__(self) -> str:
-        return self.title
+        return self.title 
     class Meta:
+        """ By default order the tasks by id """
         ordering = ['-id']
