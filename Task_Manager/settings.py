@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'Tasks',
     "rest_framework_simplejwt",
     "rest_framework",
+    'drf_yasg',
+
 ]
 
 MIDDLEWARE = [
@@ -130,7 +132,10 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10,
 }
+
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(days=2),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=5),
@@ -146,3 +151,7 @@ SIMPLE_JWT = {
     'TOKEN_TYPE_CLAIM': 'token_type',
 }
 
+SWAGGER_SETTINGS = {
+    'DEFAULT_INFO': 'Task_Manager.urls.swagger_info',
+    'DEFAULT_AUTO_SCHEMA_CLASS': 'drf_yasg.inspectors.SwaggerAutoSchema',
+}

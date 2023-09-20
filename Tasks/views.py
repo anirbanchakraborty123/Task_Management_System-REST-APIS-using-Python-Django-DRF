@@ -19,3 +19,33 @@ class TaskRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAuthenticated]
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
+    
+class TaskSortListView(generics.ListAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = TaskSerializer
+    
+    def get_queryset(self):
+        sort_by = self.request.query_params.get('sort_by', None)
+        if sort_by:
+            return Task.objects.order_by(sort_by)
+        return Task.objects.all()
+    
+
+class TaskFilterListView(generics.ListAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = TaskSerializer
+
+    def get_queryset(self):
+        queryset = Task.objects.all()
+
+        # Filter by status
+        status = self.request.query_params.get('status', None)
+        if status:
+            queryset = queryset.filter(status=status)
+
+        # Filter by due_date
+        due_date = self.request.query_params.get('due_date', None)
+        if due_date:
+            queryset = queryset.filter(due_date=due_date)
+
+        return queryset
